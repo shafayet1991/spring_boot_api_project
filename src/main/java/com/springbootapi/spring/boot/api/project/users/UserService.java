@@ -17,32 +17,32 @@ public class UserService {
             new Users("2", "ashique", "Software Engineer")
     ));
 
-    public List<Users>  getallUsersList(){
-        return arrayUsers;
-    }
-
-    public Users getUserDetails(String id){
-        return arrayUsers.stream().filter(u -> u.getId().equals(id)).findFirst().get();
-    };
-
     public Users addUser(Users users) {
-        arrayUsers.add(users);
+        userRepository.save(users);
         return users;
     }
 
+    public List<Users>  getallUsersList(){
+        List<Users> allUsersList = new ArrayList<>();
+        userRepository.findAll().forEach(allUsersList::add);
+        return allUsersList;
+    }
+
+    public Users getUserDetails(String id){
+        return userRepository.findById(id).get();
+    };
+
     public Users updateUser(Users user, String id) {
-        for(Users users : arrayUsers){
-            if(users.getId().equals(id)){
-                users.setName(user.getName());
-                users.setRole(user.getRole());
-                break;
-            }
-        }
-        return user;
+        Users data = userRepository.findById(id).get();
+        data.setRole(user.getRole());
+        data.setName(user.getName());
+        userRepository.save(data);
+        return userRepository.findById(id).get();
     }
 
     public String deleteUser(String id) {
-        arrayUsers.removeIf(obj -> obj.getId().equals(id));
+        //arrayUsers.removeIf(obj -> obj.getId().equals(id));
+        userRepository.deleteById(id);
         return "User Id-" + id + " is removed successfully";
     }
 }
