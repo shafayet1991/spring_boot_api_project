@@ -1,5 +1,8 @@
 package com.springbootapi.spring.boot.api.project.users;
+import com.springbootapi.spring.boot.api.project.MyUserDetailsService;
+import com.springbootapi.spring.boot.api.project.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,6 +11,15 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
+
+    @Autowired
+    private MyUserDetailsService userDetailsService;
 
     @RequestMapping("users")
     public List<Users> getAllUsers(){
