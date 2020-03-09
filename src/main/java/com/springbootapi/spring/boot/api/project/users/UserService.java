@@ -12,11 +12,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Users> arrayUsers = new ArrayList<>(Arrays.asList(
-            new Users("1", "shafayet", "Software Engineer"),
-            new Users("2", "ashique", "Software Engineer")
-    ));
-
     public Users addUser(Users users) {
         userRepository.save(users);
         return users;
@@ -35,6 +30,7 @@ public class UserService {
     public Users updateUser(Users user, String id) {
         Users data = userRepository.findById(id).get();
         data.setRole(user.getRole());
+        data.setName(user.getPassword());
         data.setName(user.getName());
         userRepository.save(data);
         return userRepository.findById(id).get();

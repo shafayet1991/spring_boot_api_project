@@ -1,14 +1,21 @@
 package com.springbootapi.spring.boot.api.project.users;
 import com.springbootapi.spring.boot.api.project.MyUserDetailsService;
 import com.springbootapi.spring.boot.api.project.util.JwtUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@ComponentScan("com.springbootapi.spring.boot.api.project.users")
 public class UserController {
+    public UserController() {
+    }
+
     @Autowired
     private UserService userService;
 

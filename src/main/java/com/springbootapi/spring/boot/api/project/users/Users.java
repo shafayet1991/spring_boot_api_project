@@ -2,12 +2,15 @@ package com.springbootapi.spring.boot.api.project.users;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Users")
 public class Users {
     @Id
     private String id;
     private String name;
+    private String password;
     private String role;
 
     public Users() {
@@ -16,6 +19,7 @@ public class Users {
     public Users(String id, String name, String role) {
         this.id = id;
         this.name = name;
+        this.name = password;
         this.role = role;
     }
 
@@ -31,6 +35,14 @@ public class Users {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -42,4 +54,15 @@ public class Users {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", Name='" + name + '\'' +
+                ", Role='" + role + '\'' +
+                ", Password='" + password + '\'' +
+                '}';
+    }
+
 }
